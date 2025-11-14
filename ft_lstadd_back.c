@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/28 14:23:55 by rperesve          #+#    #+#             */
-/*   Updated: 2025/11/13 11:06:48 by rperesve         ###   ########.fr       */
+/*   Created: 2025/11/14 18:23:41 by rperesve          #+#    #+#             */
+/*   Updated: 2025/11/14 18:32:45 by rperesve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int		i;
-	char	*str;
+	t_list	*data;
 
-	str = (char *)s;
-	i = 0;
-	while (str[i] != '\0')
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+		*lst = new;
+	else
 	{
-		if (str[i] == c)
-			return (&str[i]);
-		i++;
+		data = *lst;
+		while (data->next)
+			data = data->next;
+		data->next = new;
 	}
-	return (0);
-}
-
-char	*ft_strchrnul(const char *s, int c)
-{
-	while (*s)
-	{
-		if ((unsigned char) *s == (unsigned char) c)
-			break ;
-		s++;
-	}
-	return ((char *)s);
 }

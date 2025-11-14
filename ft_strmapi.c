@@ -1,46 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/28 20:05:04 by rperesve          #+#    #+#             */
-/*   Updated: 2025/11/13 11:07:44 by rperesve         ###   ########.fr       */
+/*   Created: 2025/11/13 15:13:01 by rperesve          #+#    #+#             */
+/*   Updated: 2025/11/13 17:15:50 by rperesve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <errno.h>
 
-char	*ft_strdup(const char *s)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*dest;
-	int		n;
-	int		i;
+	size_t	i;
+	char	*str;
 
-	n = ft_strlen((char *)s);
+	if (!s || !f)
+		return (NULL);
 	i = 0;
-	dest = (char *)malloc(sizeof(char) * (n + 1));
-	while (s[i] != '\0')
+	str = ft_strdup((char *)s);
+	if (!str)
+		return (NULL);
+	while (str[i])
 	{
-		dest[i] = s[i];
+		str[i] = f(i, str[i]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strndup(const char *s, unsigned int n)
-{
-	char	*dest;
-
-	dest = (char *)malloc(sizeof(char) * (n + 1));
-	if (!dest)
-	{
-		errno = ENOMEM;
-		return (0);
-	}
-	dest[n] = '\0';
-	return (dest);
+	return (str);
 }

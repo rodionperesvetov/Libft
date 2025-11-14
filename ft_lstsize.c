@@ -1,46 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/28 20:05:04 by rperesve          #+#    #+#             */
-/*   Updated: 2025/11/13 11:07:44 by rperesve         ###   ########.fr       */
+/*   Created: 2025/11/14 14:36:08 by rperesve          #+#    #+#             */
+/*   Updated: 2025/11/14 14:46:54 by rperesve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <errno.h>
 
-char	*ft_strdup(const char *s)
+int	ft_lstsize(t_list *lst)
 {
-	char	*dest;
-	int		n;
-	int		i;
+	int	i;
 
-	n = ft_strlen((char *)s);
 	i = 0;
-	dest = (char *)malloc(sizeof(char) * (n + 1));
-	while (s[i] != '\0')
+	while (lst)
 	{
-		dest[i] = s[i];
+		lst = lst->next;
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strndup(const char *s, unsigned int n)
-{
-	char	*dest;
-
-	dest = (char *)malloc(sizeof(char) * (n + 1));
-	if (!dest)
-	{
-		errno = ENOMEM;
-		return (0);
-	}
-	dest[n] = '\0';
-	return (dest);
+	return (i);
 }
