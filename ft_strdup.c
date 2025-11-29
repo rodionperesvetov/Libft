@@ -6,41 +6,40 @@
 /*   By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 20:05:04 by rperesve          #+#    #+#             */
-/*   Updated: 2025/11/13 11:07:44 by rperesve         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:35:57 by rperesve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <errno.h>
 
 char	*ft_strdup(const char *s)
 {
-	char	*dest;
+	char	*d;
 	int		n;
 	int		i;
 
 	n = ft_strlen((char *)s);
 	i = 0;
-	dest = (char *)malloc(sizeof(char) * (n + 1));
+	d = (char *)malloc(sizeof(char) * (n + 1));
+	if (!d)
+		return (NULL);
 	while (s[i] != '\0')
 	{
-		dest[i] = s[i];
+		d[i] = s[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	d[i] = '\0';
+	return (d);
 }
 
 char	*ft_strndup(const char *s, unsigned int n)
 {
-	char	*dest;
+	char	*d;
 
-	dest = (char *)malloc(sizeof(char) * (n + 1));
-	if (!dest)
-	{
-		errno = ENOMEM;
-		return (0);
-	}
-	dest[n] = '\0';
-	return (dest);
+	d = (char *)malloc(sizeof(char) * (n + 1));
+	if (!d)
+		return (NULL);
+	d[n] = '\0';
+	ft_strncpy(d, s, n);
+	return (d);
 }

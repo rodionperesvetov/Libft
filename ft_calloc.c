@@ -6,7 +6,7 @@
 /*   By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:26:02 by rperesve          #+#    #+#             */
-/*   Updated: 2025/10/30 14:54:25 by rperesve         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:37:36 by rperesve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	void	*p;
 
 	total = nmemb * size;
-	if (nmemb == 0 || size == 0 || SIZE_MAX < total)
+	if (nmemb != 0 && total / nmemb != size)
 		return (NULL);
 	p = malloc(total);
 	if (!p)

@@ -6,13 +6,13 @@
 /*   By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 11:48:32 by rperesve          #+#    #+#             */
-/*   Updated: 2025/11/13 14:51:08 by rperesve         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:54:47 by rperesve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_decimal(long n)
+static int	ft_sign(long n)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ static int	ft_decimal(long n)
 	return (i);
 }
 
-static char	*fill_str(char *str, long l, int i)
+static char	*ft_convert(char *str, long l, int i)
 {
 	if (l < 0)
 	{
@@ -56,11 +56,11 @@ char	*ft_itoa(int n)
 	long	l;
 	int		i;
 
-	l = n;
-	i = ft_decimal(l);
-	str = (char *) malloc((i + 1) * sizeof(char));
-	if ((!str))
+	l = (long)n;
+	i = ft_sign(l);
+	str = (char *) malloc(sizeof(char) * (i + 1));
+	if (!str)
 		return (NULL);
 	str[i--] = '\0';
-	return (fill_str(str, l, i));
+	return (ft_convert(str, l, i));
 }

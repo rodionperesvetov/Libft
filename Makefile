@@ -6,7 +6,7 @@
 #    By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/23 10:15:39 by rperesve          #+#    #+#              #
-#    Updated: 2025/11/14 22:06:59 by rperesve         ###   ########.fr        #
+#    Updated: 2025/11/20 18:23:20 by rperesve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,9 @@ RM = rm -f # force removal
 CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I . # include the flags
 
+# run the command below
+all: ${NAME}
+
 # compiles .c files to .o files and includes header files but stops before linking
 .o:.c
 	${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:-c=.o}
@@ -51,9 +54,6 @@ INCLUDE = -I . # include the flags
 # compiles object files into the libft.a library
 ${NAME}: ${OBJS}
 	ar rcs ${NAME} ${OBJS}
-
-# run the previous command
-all: ${NAME}
 
 # compiles bonus files
 bonus: ${OBJS} ${BONUS_OBJS}
@@ -69,9 +69,6 @@ fclean: clean
 
 # rebuilds the program
 re: fclean all
-
-test: all
-	$(CC) $(CFLAGS) test.c -L. -lft -o test && ./test
 
 # declares all the targets
 .PHONY: all clean fclean re

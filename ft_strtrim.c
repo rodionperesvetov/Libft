@@ -6,7 +6,7 @@
 /*   By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 13:40:38 by rperesve          #+#    #+#             */
-/*   Updated: 2025/11/11 16:11:44 by rperesve         ###   ########.fr       */
+/*   Updated: 2025/11/20 10:35:35 by rperesve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	set_check(char c, const char *set)
 {
 	int	i;
 
+	i = 0;
 	while (set[i] != '\0')
 	{
 		if (set[i] == c)
@@ -27,23 +28,24 @@ static int	set_check(char c, const char *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*str;
-	size_t	len;
+	char	*s2;
 	size_t	trimlen;
 	size_t	i;
 	size_t	j;
 
-	len = ft_strlen(s1);
-	while (s1[i] != '\0' && set_check(s1[i], set))
+	i = 0;
+	if (!s1)
+		return (NULL);
+	while (s1[i] && set_check(s1[i], set))
 		i++;
-	j = len - 1;
+	j = ft_strlen(s1) - 1;
 	while (j > i && set_check(s1[j], set))
 		j--;
 	trimlen = j - i;
-	if (!trimlen)
+	s2 = (char *) malloc(sizeof(char) * (trimlen + 2));
+	if (!s2)
 		return (NULL);
-	str = (char *) malloc(sizeof(char) * (trimlen + 2));
-	ft_memcpy(str, s1 + i, trimlen + 1);
-	str[trimlen + 1] = '\0';
-	return (str);
+	ft_memcpy(s2, s1 + i, trimlen + 1);
+	s2[trimlen + 1] = '\0';
+	return (s2);
 }

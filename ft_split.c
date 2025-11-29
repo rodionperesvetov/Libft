@@ -6,19 +6,13 @@
 /*   By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:55:22 by rperesve          #+#    #+#             */
-/*   Updated: 2025/11/14 13:28:56 by rperesve         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:23:03 by rperesve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// typedef struct s_array
-// {
-// 	char	*start;
-// 	char	*end;
-// } t_array;
-
-char	**ft_allocate(const char **stack, int stack_pointer)
+char	**ft_allocate(const char *(*stack)[2], int stack_pointer)
 {
 	int		i;
 	char	**result;
@@ -30,15 +24,16 @@ char	**ft_allocate(const char **stack, int stack_pointer)
 	while (i < stack_pointer)
 	{
 		result[i] = ft_strndup(stack[i][0], (stack[i][1] - stack[i][0]));
-	}
-	if (result[i] == NULL)
-	{
-		while (i > 0)
+		if (result[i] == NULL)
 		{
-			free(result[i]);
-			i--;
+			while (i > 0)
+			{
+				free(result[i]);
+				i--;
+			}
+			return (free(result[i]), NULL);
 		}
-		return (free(result[i]), NULL);
+		i++;
 	}
 	result[stack_pointer] = NULL;
 	return (result);

@@ -6,7 +6,7 @@
 /*   By: rperesve <rperesve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:22:45 by rperesve          #+#    #+#             */
-/*   Updated: 2025/10/28 12:43:44 by rperesve         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:04:13 by rperesve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*str;
+	const unsigned char	*str;
 
-	str = (unsigned char *)s;
-	if (!s)
-		return (NULL);
+	str = s;
 	while (n > 0)
 	{
-		if (*str == c)
+		if (*str == (unsigned char)c)
 			return ((void *)str);
 		str++;
 		n--;
 	}
-	return (0);
+	return (NULL);
 }
